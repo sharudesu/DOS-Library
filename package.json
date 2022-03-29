@@ -1,0 +1,25 @@
+{
+  "name": "dos-library",
+  "version": "1.0.0",
+  "description": "DOS Homework",
+  "main": "frontend/frontend.js.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "fe": "cd frontend && nodemon frontend.js",
+    "cl": "cd catalog && nodemon catalog.js",
+    "od": "cd order && nodemon order.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sharudesu/DOS-Library.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sharudesu/DOS-Library/issues"
+  },
+  "homepage": "https://github.com/sharudesu/DOS-Library#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
