@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/sharudesu/DOS-Library#readme",
   "dependencies": {
+    "axios": "^0.26.1",
     "express": "^4.17.3"
   }
 }
