@@ -39,6 +39,40 @@ app.get('/info/:id', (req, res) => {
   }
 })
 
+app.get('/quantity/:id', (req, res) => {
+  try{
+    // look for the book with the specified id
+    const data = csvconv.csvToJson('./lib.csv')
+    const foundBook = data.find(book => {
+      return book.id === req.params.id
+    })
+    
+    // return the quantity of the book excluding the 
+    res.json((({quantity}) => ({quantity}))(foundBook))
+
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
+app.put('/decrement/:id', (req, res) => {
+  try{
+    // look for the book with the specified id and decremnt its id
+    const data = csvconv.csvToJson('./lib.csv')
+    data.forEach(book => {
+      book.quantity -= (book.id === req.params.id) ? 1 : 0
+    })
+    csvconv.jsonToCsv('./lib.csv', data)
+    
+    // return a success message
+    res.json({success: true})
+  }
+  catch(err){
+    console.log(err)
+  }
+})
+
 app.listen(port, () => {
   console.log("Catalog Server is Running!")
 })

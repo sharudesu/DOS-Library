@@ -4,12 +4,10 @@ const csvconv = {
   csvToJson: (path) => {
     try{
       const data = fs.readFileSync(path)
-      const stringifiedData = data.toString()
-      const rows = stringifiedData.split('\r\n')
-      const headers = rows[0].split(',')
+      const [dataHeaders, ...dataBooks]  = data.toString().trim().split('\n')
+      const headers = dataHeaders.split(',')
       let jsonArray = []
-      rows.forEach((row, i) => {
-        if(i == 0) return
+      dataBooks.forEach((row) => {
         const rowData = row.split(',')
         let rowJson = {}
         headers.forEach((header, j) => {
