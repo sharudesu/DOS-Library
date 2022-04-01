@@ -5,27 +5,40 @@ const port = 3002
 
 app.get('/search/:title', (req, res) => {
   try{
-    // convert both the search parameter and the book title to lower case and search for the book
+    // match the book title with the search parameter and add it to the found books list
     const data = csvconv.csvToJson('./lib.csv')
-    const foundBook = data.find((book) => {
+    const foundBooks = data.filter((book) => {
       return book.title.toLowerCase().includes(req.params.title.toLowerCase())
     })
 
-    // return the id and the title of the book, otherwise return an empty json object
-    if(foundBook){
-      res.json({
-        id: foundBook.id,
-        title: foundBook.title
-      })
-      return;
-    }
-    res.json({})
+    // return the id and the title only from the found books list
+    const searchResult = foundBooks.map(book => {
+      return (({id, title}) => ({id, title}))(book)
+    })
+    res.json(searchResult)
   }
   catch(err){
-    console.log(err);
+    console.log(err)
+  }
+})
+
+app.get('/info/:id', (req, res) => {
+  try{
+    // look for the book with the specified id
+    const data = csvconv.csvToJson('./lib.csv')
+    const foundBook = data.find(book => {
+      return book.id === req.params.id
+    })
+
+    // return the data of the book excluding the 
+    const {id, ...reducedBook} = foundBook ?? {}
+    res.json(reducedBook)
+  }
+  catch(err){
+    console.log(err)
   }
 })
 
 app.listen(port, () => {
-  console.log("Catalog Server is Running!");
+  console.log("Catalog Server is Running!")
 })
