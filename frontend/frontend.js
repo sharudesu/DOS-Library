@@ -1,6 +1,5 @@
 const express = require("express")
 const axios = require("axios")
-const fs = require("fs")
 const app = express()
 const port = 3001
 const catalogServer = "http://localhost:3002"
@@ -24,6 +23,7 @@ app.get('/info/:id', async (req, res) => {
     console.log(err);
   }
 })
+
 
 app.listen(port, () => {
   console.log("Frontend Server is Running!")
