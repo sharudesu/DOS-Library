@@ -24,7 +24,6 @@ app.get('/info/:id', async (req, res) => {
   }
 })
 
-
 app.listen(port, () => {
   console.log("Frontend Server is Running!")
 })
