@@ -4,7 +4,7 @@ const csvconv = {
   csvToJson: (path) => {
     try{
       const data = fs.readFileSync(path)
-      const [dataHeaders, ...dataBooks]  = data.toString().trim().split('\n')
+      const [dataHeaders, ...dataBooks]  = data.toString().trim().split(/(\n|\r|\n\r|\r\n)/)
       const headers = dataHeaders.split(',')
       let jsonArray = []
       dataBooks.forEach((row) => {
