@@ -7,6 +7,7 @@ app.get('/search/:title', (req, res) => {
   try{
     // match the book title with the search parameter and add it to the found books list
     const data = csvconv.csvToJson('./lib.csv')
+    console.log(data)
     const foundBooks = data.filter((book) => {
       return book.title.toLowerCase().includes(req.params.title.toLowerCase())
     })
@@ -47,9 +48,9 @@ app.get('/quantity/:id', (req, res) => {
       return book.id === req.params.id
     })
     
-    // return the quantity of the book excluding the 
-    res.json((({quantity}) => ({quantity}))(foundBook))
-
+    // return the quantity of the book excluding the rest of the data
+    const quantity = foundBook ? (({quantity}) => ({quantity}))(foundBook) : {quantity: 0}
+    res.json(quantity)
   }
   catch(err){
     console.log(err)
