@@ -2,7 +2,7 @@ const express = require("express")
 const axios = require("axios")
 const app = express()
 const port = 3003
-const catalogServer = "http://localhost:3002"
+const catalogServer = "http://172.15.0.3:3002"
 
 app.get('/purchase/:id', async (req, res) => {
   try {
