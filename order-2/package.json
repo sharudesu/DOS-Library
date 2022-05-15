@@ -2,10 +2,10 @@
   "name": "dos-library",
   "version": "1.0.0",
   "description": "DOS Homework",
-  "main": "catalgo.js",
+  "main": "order.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon catalog.js"
+    "dev": "nodemon order.js"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/sharudesu/DOS-Library#readme",
   "dependencies": {
-    "axios": "^0.27.2",
+    "axios": "^0.26.1",
     "express": "^4.17.3"
   }
 }

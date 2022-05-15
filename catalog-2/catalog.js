@@ -2,8 +2,8 @@ const csvconv = require("./csvconv")
 const express = require("express")
 const axios = require("axios")
 const app = express()
-const port = 3002
-const catalogServers = ["http://localhost:3004"]
+const port = 3004
+const catalogServers = ["http://localhost:3002"]
 const frontendServer = "http://localhost:3001"
 
 app.use((req, res, next) => {
@@ -87,13 +87,13 @@ app.put('/decrement/:id', async (req, res) => {
       book.quantity -= (book.id === req.params.id) ? 1 : 0
     })
     csvconv.jsonToCsv('./lib.csv', data)
-
+    
     catalogServers.forEach(async (server) => {
       await axios.put(server + '/decrementInternally/' + req.params.id)
     })
 
     await axios.put(frontendServer + '/invalidate/' + req.params.id)
-    
+
     // return a success message
     res.json({success: true})
   }
@@ -110,7 +110,7 @@ app.put('/decrementInternally/:id', (req, res) => {
       book.quantity -= (book.id === req.params.id) ? 1 : 0
     })
     csvconv.jsonToCsv('./lib.csv', data)
-
+    
     // return a success message
     res.json({success: true})
   }
